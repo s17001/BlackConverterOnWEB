@@ -3,7 +3,7 @@
         <div>ここは説明文です</div>
         <div><textarea v-model="input" onchange="" name="" id="input" cols="30" rows="10"></textarea></div>
         <div><textarea name="" id="output" cols="30" rows="10"></textarea></div>
-        <p>{{input}}</p>
+        <p>{{inputs}}</p>
     </div>
 </template>
 
@@ -60,11 +60,35 @@
         name: "Converter",
         data() {
             return {
-                input:''
+                inputs:'',
+                output:[]
             }
         },
         methods:{
-            
+            ConvertingInput(){
+
+                for (const input of this.inputs) {
+
+                    //使える文字なら => 置き換える
+                    if (input in charTable) {
+                        output.push(charTable[input]);
+                        continue;
+                    }
+
+                    // charCode単位でイテレートする
+                    for (let i = 0, l = input.length; i < l; ++i) {
+                        //使えない文字なら => utf8に変換して、数字を記号化する
+                        const parsedArr = [...(input.charCodeAt(i).toString(16) + [])];
+
+                        //ここで形成した配列をさらにreplaceBlackCodeしてまとめる
+                        const flamedArr = parsedArr.map(replaceBlackCode);
+
+                        const utf8code = wrapper(createReturnUTF(flamedArr.join("+")));
+                        output.push(utf8code);
+                    }
+                }
+
+            }
         }
     }
 </script>
