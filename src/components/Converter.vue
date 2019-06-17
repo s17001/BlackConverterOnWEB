@@ -2,7 +2,7 @@
     <div>
         <div>ここは説明文です</div>
         <div><textarea v-model="inputs" v-on:keyup="ConvertingInput" name="" id="input" cols="100" rows="10"></textarea></div>
-        <div><textarea v-model="output" id="output" cols="100" rows="10"></textarea></div>
+        <div><textarea v-bind:value="basecode+output" id="output" cols="100" rows="10"></textarea></div>
         <p>{{inputs}}</p>
         <button @click="evalCode">みんな大好きeval</button>
     </div>
@@ -61,7 +61,8 @@
         data() {
             return {
                 inputs:'',
-                output:''
+                output:'',
+                basecode:blackConstructor
             }
         },
         methods:{
@@ -88,8 +89,10 @@
                         processingData.push(utf8code);
                     }
                 }
-                this.output = blackConstructor
-                this.output += processingData.join('+')
+                this.output = processingData.join('+')
+            },
+            evalCode(){
+
             }
         }
     }
