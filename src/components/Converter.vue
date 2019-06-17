@@ -1,10 +1,10 @@
 <template>
     <div>
         <div>ここは説明文です</div>
-        <div><textarea v-model="inputs" v-on:keyup="ConvertingInput" name="" id="input" cols="30" rows="10"></textarea></div>
-        <div><textarea v-model="output" id="output" cols="30" rows="10"></textarea></div>
+        <div><textarea v-model="inputs" v-on:keyup="ConvertingInput" name="" id="input" cols="100" rows="10"></textarea></div>
+        <div><textarea v-model="output" id="output" cols="100" rows="10"></textarea></div>
         <p>{{inputs}}</p>
-        <button @click="ConvertingInput"></button>
+        <button @click="evalCode">みんな大好きeval</button>
     </div>
 </template>
 
