@@ -1,9 +1,10 @@
 <template>
     <div>
         <div>ここは説明文です</div>
-        <div><textarea v-model="input" onchange="" name="" id="input" cols="30" rows="10"></textarea></div>
-        <div><textarea name="" id="output" cols="30" rows="10"></textarea></div>
+        <div><textarea v-model="inputs" v-on:keyup="ConvertingInput" name="" id="input" cols="30" rows="10"></textarea></div>
+        <div><textarea v-model="output" id="output" cols="30" rows="10"></textarea></div>
         <p>{{inputs}}</p>
+        <button @click="ConvertingInput"></button>
     </div>
 </template>
 
@@ -61,17 +62,18 @@
         data() {
             return {
                 inputs:'',
-                output:[]
+                output:''
             }
         },
         methods:{
             ConvertingInput(){
+                const processingData =[]
 
-                for (const input of this.inputs) {
+                for (const input of [...this.inputs+[]]) {
 
                     //使える文字なら => 置き換える
                     if (input in charTable) {
-                        output.push(charTable[input]);
+                        processingData.push(charTable[input]);
                         continue;
                     }
 
@@ -84,10 +86,11 @@
                         const flamedArr = parsedArr.map(replaceBlackCode);
 
                         const utf8code = wrapper(createReturnUTF(flamedArr.join("+")));
-                        output.push(utf8code);
+                        processingData.push(utf8code);
                     }
                 }
-
+                this.output = blackConstructor
+                this.output += processingData.join('+')
             }
         }
     }
