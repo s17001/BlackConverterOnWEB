@@ -2,6 +2,9 @@
   <div id="app">
     <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <Converter />
+    <div style="text-align: right">
+      <small >作った人 : <a href="https://twitter.com/Ryu1__1uyR">Ryu</a></small>
+    </div>
   </div>
 </template>
 
@@ -26,5 +29,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+a{
+  text-decoration: none;
+  color: #42b983;
+}
+a:hover{
+  color: steelblue;
 }
 </style>
